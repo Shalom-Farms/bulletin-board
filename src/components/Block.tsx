@@ -24,6 +24,10 @@ const RichText = (props: RichText) => {
         content = <span style={{ color: annotations.color }}>{content}</span>
     }
 
+    if(props.href) {
+        return <a href={props.href} target="_blank">{content}</a>
+    }
+
     return content;
 }
 

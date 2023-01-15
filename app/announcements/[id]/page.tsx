@@ -7,10 +7,12 @@ import { Suspense } from "react";
 import getPage from "@/src/api/getPage";
 import LoadingContent from "@/src/components/LoadingContent";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 const TitleContent = async (props: { promise: Promise<AnnouncementType> }) => {
     const page = await props.promise
+
+    if(!page) return null
 
     return <>
     {page.icon?.emoji && <div className="h3-mktg mb-2">{page.icon.emoji}</div>}
@@ -20,6 +22,8 @@ const TitleContent = async (props: { promise: Promise<AnnouncementType> }) => {
 
 const BlockContent = async (props: { promise: Promise<Block[]> }) => {
     const blocks = await props.promise
+
+    if(!blocks) return null
 
     return <Blocks blocks={blocks} />
 }

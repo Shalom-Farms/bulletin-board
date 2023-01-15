@@ -2,11 +2,12 @@ import queryDb, { TABLES } from "@/src/api/queryDb";
 import AnnouncementsBox from "@/src/components/AnnouncementsBox";
 import { Announcement } from "@/src/types";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
-export default async function Announcements(props: { searchParams: { start?: string, prev?: string } }) {
+export default async function Announcements(props: { searchParams?: { start?: string, prev?: string } }) {
     const pageSize = 25
-    const { start, prev } = props.searchParams
+    const start = props.searchParams?.start
+    const prev = props.searchParams?.prev
 
     const { results: announcements, nextCursor, hasMore } = await queryDb<Announcement>(
         TABLES.announcements,

@@ -58,6 +58,7 @@ const mergeLists = (blocks: BlockType[]) => {
 }
 
 export default async function getPageBlocks(pageId: string) {
+    if(pageId.length < 36) return null
 
     let hasNext = true
     let cursor

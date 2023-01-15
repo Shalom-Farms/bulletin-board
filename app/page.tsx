@@ -4,6 +4,8 @@ import AnnouncementsBox from '@/src/components/AnnouncementsBox';
 import EventsBox from '@/src/components/EventsBox';
 import { formatISO } from 'date-fns';
 
+export const revalidate = 300;
+
 export default async function Home() {
   const { results: announcements, hasMore: hasMoreAnnouncements } = await queryDb<Announcement>(
     TABLES.announcements,

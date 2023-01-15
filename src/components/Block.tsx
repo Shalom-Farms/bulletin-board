@@ -35,16 +35,16 @@ export const RichTexts = (props: { rich_text?: RichText[] }) => {
     </>
 }
 
-const ColumnList = (props: { children: Block[]}) => {
+const ColumnList = (props: { blocks: Block[]}) => {
     return <div className="container-lg clearfix"> 
-        <div className="col-md-6 float-md-left pr-md-2"><Column children={props.children[0].children} /></div>
-        <div className="col-md-6 float-md-left pl-md-2"><Column children={props.children[1].children} /></div>
+        <div className="col-md-6 float-md-left pr-md-2"><Column blocks={props.blocks[0].children} /></div>
+        <div className="col-md-6 float-md-left pl-md-2"><Column blocks={props.blocks[1].children} /></div>
     </div>
 }
 
-const Column = (props: { children?: Block[]}) => {
-    return <>{props.children?.map((child, i) => (
-        <BlockComponent key={`column-block-${i}`} block={child} />
+const Column = (props: { blocks?: Block[]}) => {
+    return <>{props.blocks?.map((block, i) => (
+        <BlockComponent key={`column-block-${block.id}`} block={block} />
     ))}</>
 }
 
@@ -114,5 +114,5 @@ export default function BlockComponent(props: { block: Block }) {
 
     if(!Component) return <></>
 
-    return <Component {...block[block.type]} list_items={block.list_items} children={block.children} />
+    return <Component {...block[block.type]} list_items={block.list_items} blocks={block.children} />
 }

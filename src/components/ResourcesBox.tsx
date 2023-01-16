@@ -1,4 +1,7 @@
+'use client'
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Resource } from "../types";
 import { RichTexts } from "./Block";
 import Labels from "./Labels";
@@ -15,10 +18,54 @@ const sortOrder: { [key: string]: number}  = {
     "Resource": 1
 }
 
-export default function ResourcesBox(props: { resources: Resource[], showViewAll?: boolean }) {
+const Filters = (props: { onFilter: Function, labels: { color: string, name: string }[], filterObj?: { color: string, name: string }}) => {
+    const { labels, filterObj } = props;
+
+    const [open, setOpen] = useState<boolean>(false);
+   
+
+    return <div>
+    <details className="dropdown details-reset details-overlay d-inline-block" onClick={(e) => { e.preventDefault(); setOpen(!open); }} open={open}>
+        <summary className="btn" aria-haspopup="true">
+            {filterObj && <span className={`Label ${filterObj.color ? `Label--${filterObj.color}`: ""}`}>{filterObj.name}</span>}
+            {!filterObj && "Filter"}
+        <div className="dropdown-caret"></div>
+        </summary>
+
+        <ul className="dropdown-menu dropdown-menu-se" style={{ maxHeight: "200px", overflowY: "scroll"}}>
+            {labels.map((label, i) => (
+                <li key={`filter-label-${i}`} style={{ cursor: "pointer"}}>
+                    <a onClick={(e) => { props.onFilter(label); }} className="dropdown-item"><span className={`Label ${label.color ? `Label--${label.color}`: ""}`}>{label.name}</span></a></li>
+            ))}
+        </ul>
+    </details>
+    {filterObj && <div className="d-inline-block ml-3" ><a onClick={() => props.onFilter(null)} className="color-fg-subtle text-light" style={{ textDecoration: "none", cursor: "pointer" }}>Clear filter</a></div>}
+</div>
+}
+
+export default function ResourcesBox(props: { resources: Resource[], showViewAll?: boolean, showFilter?: boolean }) {
     const { resources } = props;
 
-    const groupedResources = resources.reduce((result: { [key: string]: Resource[] }, resource: Resource) => {
+    const [filter, setFilter] = useState<{ color: string, name: string }|null>()
+
+    const uniqueLabels = Object.values(resources.reduce((result: { [key: string]: { color: string, name: string }}, resource: Resource) => {
+        resource.properties.Tag.multi_select.forEach(select => {
+            result[select.name] = { name: select.name, color: select.color }
+        })
+
+        return result
+    }, {}))
+
+    let filteredResources = resources;
+    const filterObj = uniqueLabels.find(label => label.name === filter?.name )
+
+    if(filter) {
+        filteredResources = resources.filter(resource => {
+            return resource.properties.Tag.multi_select.some((select) => select.name === filter.name)
+        })
+    }
+
+    const groupedResources = filteredResources.reduce((result: { [key: string]: Resource[] }, resource: Resource) => {
         const type = resource.properties.Type.select.name;
         if(!result[type]) {
           result[type] = [resource]
@@ -29,7 +76,9 @@ export default function ResourcesBox(props: { resources: Resource[], showViewAll
         return result
       }, {})
 
-    return <nav className="SideNav border mt-5 rounded-2">
+    return <>
+    {props.showFilter && <Filters labels={uniqueLabels} onFilter={setFilter} filterObj={filterObj}/>}
+    <nav className="SideNav border mt-5 rounded-2">
     <div className="SideNav-item">
       <h2 className="h2">ℹ Resources</h2>
     </div>
@@ -51,6 +100,7 @@ export default function ResourcesBox(props: { resources: Resource[], showViewAll
             View All
         </Link>
     </div>}
-  </nav>
+  </nav></>
 }
+
 

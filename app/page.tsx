@@ -48,7 +48,7 @@ export default async function Home() {
         <EventsBox events={events} showViewAll={hasMoreEvents} />
         </div>
         <div id="resources" className="pt-5">  
-        <ResourcesBox resources={resources} />
+        <ResourcesBox resources={resources} showViewAll={true} />
         </div>      
       </main>
   )

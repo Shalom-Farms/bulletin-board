@@ -15,7 +15,7 @@ export default async function Announcements(props: { searchParams?: { filter?: s
            { property: "Published", checkbox: { equals: true } },
         ]},
         [{ property: "Priority", direction: "ascending" }],
-        100
+        1000
       )
 
     return <main className="container p-md-0 p-3 clearfix f4">

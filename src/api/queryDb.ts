@@ -15,25 +15,40 @@ const DATABASE_IDS: { [key: string]: string } = {
 
 export default async function queryDb<T>(table: typeof TABLES[keyof typeof TABLES], filter?: {}, sorts?: { property: string, direction: string }[], page_size?: number, start_cursor?: string): Promise<{
     results: T[],
-    hasMore: boolean,
-    nextCursor: string | null
+    hasMore: boolean | undefined,
+    nextCursor: string | null | undefined
 }> {
     const database_id = DATABASE_IDS[table]
-    const res = await notion.databases.query({
-        database_id,
-        // @ts-ignore
-        filter,
-        // @ts-ignore
-        sorts,
-        start_cursor,
-        page_size
-    })
 
+    let hasNext = true;
+    let res;
+    let results: T[] = []
+
+    while(hasNext) {
+        res = await notion.databases.query({
+            database_id,
+            // @ts-ignore
+            filter,
+            // @ts-ignore
+            sorts,
+            start_cursor,
+            page_size
+        })
+
+        if(page_size && page_size > 100) {
+            hasNext = res.has_more
+        } else {
+            hasNext = false
+        }
+
+        // @ts-ignore   
+        results = results.concat(res.results)
+    }
     
     return { 
         // @ts-ignore   
-        results: res.results, 
-        hasMore: res.has_more,
-        nextCursor: res.next_cursor
+        results, 
+        hasMore: res?.has_more,
+        nextCursor: res?.next_cursor
     }
 }

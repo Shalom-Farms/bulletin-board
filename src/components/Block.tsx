@@ -25,7 +25,7 @@ const RichText = (props: RichText) => {
     }
 
     if(props.href) {
-        return <a href={props.href} target="_blank">{content}</a>
+        return <a href={props.href} target="_blank" rel="noreferrer">{content}</a>
     }
 
     return content;

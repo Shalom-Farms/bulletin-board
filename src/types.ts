@@ -32,13 +32,45 @@ type DateCol = DBCol & {
     }
   }
 
+type NumberCol = DBCol & {
+    number: number
+}
+
+export type SelectCol = DBCol & {
+    select: {
+        id: string
+        name: string
+        color: string
+    }
+}
+
+type MultiSelectCol = DBCol & {
+    multi_select: SelectCol["select"][]
+}
+
+type UrlCol = DBCol & {
+    url: string
+}
+
 export type Announcement = DBRow & {
     properties: { 
       Title: TitleCol
       Date: DateCol
       Published: CheckboxCol
+      Tags: MultiSelectCol
     }
   }
+
+export type Resource = DBRow & {
+    properties: {
+        Name: TitleCol
+        Url: UrlCol
+        Type: SelectCol
+        Priority: NumberCol
+        Description: RichTextCol
+        Tag: MultiSelectCol
+    }
+}
 
 export type Event = DBRow & {
     properties: {

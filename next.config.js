@@ -5,6 +5,6 @@ const nextConfig = {
     appDir: true,
     scrollRestoration: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

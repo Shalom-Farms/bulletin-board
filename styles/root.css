@@ -1,9 +1,10 @@
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-    --color-header-bg: rgb(251, 251, 250);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --color-header-bg: rgb(251, 251, 250);
 }
 
 .container {
@@ -21,11 +22,11 @@ header {
   color: rgb(64, 44, 27) !important;
   border: none !important;
   font-weight: normal !important;
-  background: rgba(227, 226, 224, 0.5); 
+  background: rgba(227, 226, 224, 0.5);
 }
 
 .Label--green {
-  background: rgb(219, 237, 219)
+  background: rgb(219, 237, 219);
 }
 
 .Label--pink {
@@ -69,19 +70,19 @@ header {
   position: absolute;
   width: 100%;
   height: 30px;
-  z-index  : 1;
-  bottom   : 0;
-  left     : 0;
-  pointer-events   : none;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
   z-index: 100;
-  background-image : linear-gradient(to bottom, 
-                    rgba(255,255,255, 0), 
-                    rgba(255,255,255, 1) 90%);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 90%
+  );
 }
 
-
-
-@media only screen and (max-device-width: 543px){
+@media only screen and (max-device-width: 543px) {
   .hide-sm {
     display: none !important;
   }
@@ -89,45 +90,49 @@ header {
 
 .shine {
   background: #f6f7f8;
-  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
   background-repeat: no-repeat;
-  background-size: 800px 104px; 
+  background-size: 800px 104px;
   display: inline-block;
-  position: relative; 
-  
+  position: relative;
+
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-fill-mode: forwards; 
-  animation-fill-mode: forwards; 
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
   -webkit-animation-name: placeholderShimmer;
   animation-name: placeholderShimmer;
   -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
-  }
-
+}
 
 .shine-group {
   display: inline-flex;
-  flex-direction: column; 
-  vertical-align: top; 
+  flex-direction: column;
+  vertical-align: top;
 }
 
 .shine-line {
   height: 20px;
   margin-top: 10px;
-  width: 708px; 
+  width: 708px;
   max-width: calc(100vw - 75px);
 }
-
 
 @keyframes placeholderShimmer {
   0% {
     background-position: -468px 0;
   }
-  
+
   100% {
-    background-position: 468px 0; 
+    background-position: 468px 0;
   }
 }

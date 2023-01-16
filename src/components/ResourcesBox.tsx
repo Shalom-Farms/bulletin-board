@@ -85,7 +85,7 @@ export default function ResourcesBox(props: { resources: Resource[], showViewAll
     {Object.keys(groupedResources).sort((a, b) => sortOrder[a] - sortOrder[b]).map((type, i) => (<>
         <div key={`resource-${i}`} id={type.replace(" ", "-")} className="SideNav-item color-bg-default h4">{ICONS[type]} {type}</div>
         <nav className="SideNav color-bg-default border-top fade-out" >
-            <div className="py-3 pl-6 " style={props.showViewAll ? { maxHeight:  "300px", overflowY: "scroll" } : undefined}>{
+            <div className="py-3 pl-md-6 pl-3 pr-3 pr-md-6" style={props.showViewAll ? { maxHeight:  "300px", overflowY: "scroll" } : undefined}>{
             groupedResources[type].map((resource,j) => (
                 <a key={`resource-${i}-${j}`} className="SideNav-subItem color-fg-default mb-2" target="_blank" rel="noreferrer" href={resource.properties.Url.url}>
                     <div className="text-semibold"><RichTexts rich_text={resource.properties.Name.title} /><span className="mr-2"></span><svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 512 512"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"/></svg></div>

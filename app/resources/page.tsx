@@ -25,9 +25,11 @@ export default async function Announcements(props: { searchParams?: { filter?: s
                 <Link className="previous_page" rel="next" href="/" aria-label="Go home">Back to board</Link>
                 </div>
             </div>
-            <a className="UnderlineNav-item" href="#Important-Documents">🔖 Documents</a>
-            <a className="UnderlineNav-item" href="#Resource">💭 Resource</a>
-            <a className="UnderlineNav-item" href="#Fun-Finds">✨ Fun Finds</a>
+            <span className="Truncate">
+            <a className="UnderlineNav-item" href="#Important-Documents">🔖 <span className="hide-sm">&nbsp;Documents</span></a>
+            <a className="UnderlineNav-item" href="#Resource">💭 <span className="hide-sm">&nbsp;Resource</span></a>
+            <a className="UnderlineNav-item" href="#Fun-Finds">✨<span className="hide-sm">&nbsp;Fun Finds</span></a>
+            </span>
         </nav>
         
         <ResourcesBox resources={resources} showFilter />

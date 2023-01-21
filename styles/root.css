@@ -18,6 +18,18 @@ header {
   background-color: rgb(251, 251, 250) !important;
 }
 
+.breadcrumbs {
+  box-shadow: rgb(0 0 0 / 2%) 0px -2px 0px 0px inset;
+  position: sticky;
+  background: #fff;
+  top: 0px;
+  z-index: 500;
+}
+
+.breadcrumbs > div {
+  background-color: rgba(251, 251, 250, 0.5) !important;
+}
+
 .hover-bg:hover {
   background: rgba(227, 226, 224, 0.3);
 }

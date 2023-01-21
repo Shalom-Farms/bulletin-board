@@ -6,6 +6,7 @@ import { Announcement as AnnouncementType, Block } from "@/src/types";
 import { Suspense } from "react";
 import getPage from "@/src/api/getPage";
 import LoadingContent from "@/src/components/LoadingContent";
+import Breadcrumbs from "@/src/components/Breadcrumbs";
 
 export const revalidate = 300;
 
@@ -44,15 +45,20 @@ export default async function Announcement(props: { params: { id: string } }) {
   const page: Promise<AnnouncementType> = getPage(props.params.id);
 
   return (
-    <main className="container p-md-0 p-3 clearfix f4">
-      <Suspense fallback={<LoadingContent count={3} />}>
-        {/* @ts-ignore */}
-        <TitleContent promise={page} />
-      </Suspense>
-      <Suspense fallback={<LoadingContent count={18} />}>
-        {/* @ts-ignore */}
-        <BlockContent promise={blocks} />
-      </Suspense>
-    </main>
+    <>
+      <Breadcrumbs
+        links={[{ url: "/announcements", label: "📢 Announcements" }]}
+      />
+      <main className="container p-md-0 p-3 clearfix f4">
+        <Suspense fallback={<LoadingContent count={3} />}>
+          {/* @ts-ignore */}
+          <TitleContent promise={page} />
+        </Suspense>
+        <Suspense fallback={<LoadingContent count={18} />}>
+          {/* @ts-ignore */}
+          <BlockContent promise={blocks} />
+        </Suspense>
+      </main>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import queryDb, { TABLES } from "@/src/api/queryDb";
+import Breadcrumbs from "@/src/components/Breadcrumbs";
 import EventsBox from "@/src/components/EventsBox";
 import { Event } from "@/src/types";
 import { formatISO } from "date-fns";
@@ -35,21 +36,24 @@ export default async function Events(props: {
   );
 
   return (
-    <main className="container p-md-0 p-3 clearfix f4">
-      <EventsBox
-        events={events}
-        next={
-          hasMore
-            ? `/events/?start=${nextCursor}` +
-              `&prev=${encodeURIComponent(
-                `/events/` +
-                  (start ? `?start=${start}` : "") +
-                  (prev ? `&prev=${prev}` : "")
-              )}`
-            : undefined
-        }
-        prev={prev}
-      />
-    </main>
+    <>
+      <Breadcrumbs links={[]} />
+      <main className="container p-md-0 p-3 clearfix f4">
+        <EventsBox
+          events={events}
+          next={
+            hasMore
+              ? `/events/?start=${nextCursor}` +
+                `&prev=${encodeURIComponent(
+                  `/events/` +
+                    (start ? `?start=${start}` : "") +
+                    (prev ? `&prev=${prev}` : "")
+                )}`
+              : undefined
+          }
+          prev={prev}
+        />
+      </main>
+    </>
   );
 }

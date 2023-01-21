@@ -1,7 +1,7 @@
 import queryDb, { TABLES } from "@/src/api/queryDb";
 import ResourcesBox from "@/src/components/ResourcesBox";
 import { Resource } from "@/src/types";
-import Link from "next/link";
+import Breadcrumbs from "@/src/components/Breadcrumbs";
 
 export const revalidate = 300;
 
@@ -14,8 +14,11 @@ export default async function Resources() {
   );
 
   return (
-    <main className="container p-md-0 p-3 clearfix f4">
-      <ResourcesBox resources={resources} showFilter />
-    </main>
+    <>
+      <Breadcrumbs links={[]} />
+      <main className="container p-md-0 p-3 clearfix f4">
+        <ResourcesBox resources={resources} showFilter />
+      </main>
+    </>
   );
 }

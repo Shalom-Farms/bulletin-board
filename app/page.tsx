@@ -42,7 +42,7 @@ export default async function Home() {
     );
 
   return (
-    <main className="container px-md-0 px-3">
+    <main className="container pt-3 px-md-0 px-3">
       <nav
         className="UnderlineNav UnderlineNav--right mb-5"
         style={{

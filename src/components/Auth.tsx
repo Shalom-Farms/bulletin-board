@@ -30,7 +30,7 @@ function Auth({ children }: AuthContextProps) {
 
   return (
     <>
-      <header className="Header mb-7">
+      <header className="Header">
         <div className="Header-item">
           <a href="/" className="Header-link f4 d-flex flex-items-center">
             <img

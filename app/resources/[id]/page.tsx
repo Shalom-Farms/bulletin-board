@@ -2,6 +2,7 @@ import getPage from "@/src/api/getPage";
 import getPageBlocks from "@/src/api/getPageBlocks";
 import { RichTexts } from "@/src/components/Block";
 import Blocks from "@/src/components/Blocks";
+import Breadcrumbs from "@/src/components/Breadcrumbs";
 import LoadingContent from "@/src/components/LoadingContent";
 import { Block, Resource as ResourceType } from "@/src/types";
 import { Suspense } from "react";
@@ -40,15 +41,18 @@ export default async function Resource(props: { params: { id: string } }) {
   const page: Promise<ResourceType> = getPage(props.params.id);
 
   return (
-    <main className="container p-md-0 p-3 clearfix f4">
-      <Suspense fallback={<LoadingContent count={3} />}>
-        {/* @ts-ignore */}
-        <TitleContent promise={page} />
-      </Suspense>
-      <Suspense fallback={<LoadingContent count={18} />}>
-        {/* @ts-ignore */}
-        <BlockContent promise={blocks} />
-      </Suspense>
-    </main>
+    <>
+      <Breadcrumbs links={[{ url: "/resources", label: "ℹ️ Resources" }]} />
+      <main className="container p-md-0 p-3 clearfix f4">
+        <Suspense fallback={<LoadingContent count={3} />}>
+          {/* @ts-ignore */}
+          <TitleContent promise={page} />
+        </Suspense>
+        <Suspense fallback={<LoadingContent count={18} />}>
+          {/* @ts-ignore */}
+          <BlockContent promise={blocks} />
+        </Suspense>
+      </main>
+    </>
   );
 }

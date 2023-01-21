@@ -15,7 +15,7 @@ export default async function Resources() {
 
   return (
     <main className="container p-md-0 p-3 clearfix f4">
-      <ResourcesBox resources={resources} />
+      <ResourcesBox resources={resources} showFilter />
     </main>
   );
 }

@@ -1,148 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ResourceLink } from "../types";
 import { RichTexts } from "./Block";
 import Labels from "./Labels";
 
-const ICONS: { [key: string]: string } = {
-  "Important Documents": "🔖",
-  "Fun Finds": "✨",
-  Resource: "💭",
-};
-
-const sortOrder: { [key: string]: number } = {
-  "Important Documents": 0,
-  "Fun Finds": 2,
-  Resource: 1,
-};
-
-const Filters = (props: {
-  onFilter: Function;
-  labels: { color: string; name: string }[];
-  filterObj?: { color: string; name: string };
-}) => {
-  const { labels, filterObj } = props;
-
-  const [open, setOpen] = useState<boolean>(false);
-
-  return (
-    <div>
-      <details
-        className="dropdown details-reset details-overlay d-inline-block"
-        onClick={(e) => {
-          e.preventDefault();
-          setOpen(!open);
-        }}
-        open={open}
-      >
-        <summary className="btn" aria-haspopup="true">
-          {filterObj && (
-            <span
-              className={`Label ${
-                filterObj.color ? `Label--${filterObj.color}` : ""
-              }`}
-            >
-              {filterObj.name}
-            </span>
-          )}
-          {!filterObj && "Filter"}
-          <div className="dropdown-caret"></div>
-        </summary>
-
-        <ul
-          className="dropdown-menu dropdown-menu-se"
-          style={{ maxHeight: "200px", overflowY: "scroll" }}
-        >
-          {labels.map((label, i) => (
-            <li key={`filter-label-${i}`} style={{ cursor: "pointer" }}>
-              <a
-                onClick={(e) => {
-                  props.onFilter(label);
-                }}
-                className="dropdown-item"
-              >
-                <span
-                  className={`Label ${
-                    label.color ? `Label--${label.color}` : ""
-                  }`}
-                >
-                  {label.name}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </details>
-      {filterObj && (
-        <div className="d-inline-block ml-3">
-          <a
-            onClick={() => props.onFilter(null)}
-            className="color-fg-subtle text-light"
-            style={{ textDecoration: "none", cursor: "pointer" }}
-          >
-            Clear filter
-          </a>
-        </div>
-      )}
-    </div>
-  );
-};
-
 export default function ResourceLinksBox(props: {
   links: ResourceLink[];
   showViewAll?: boolean;
-  showFilter?: boolean;
 }) {
   const { links } = props;
 
-  const [filter, setFilter] = useState<{
-    color: string;
-    name: string;
-  } | null>();
-
-  const uniqueLabels = Object.values(
-    links.reduce(
-      (
-        result: { [key: string]: { color: string; name: string } },
-        resource: ResourceLink
-      ) => {
-        resource.properties.Tags.multi_select.forEach((select) => {
-          result[select.name] = { name: select.name, color: select.color };
-        });
-
-        return result;
-      },
-      {}
-    )
-  );
-
-  let filteredLinks = links;
-  const filterObj = uniqueLabels.find((label) => label.name === filter?.name);
-
-  if (filter) {
-    filteredLinks = links.filter((link) => {
-      return link.properties.Tags.multi_select.some(
-        (select) => select.name === filter.name
-      );
-    });
-  }
-
   return (
     <>
-      {props.showFilter && (
-        <Filters
-          labels={uniqueLabels}
-          onFilter={setFilter}
-          filterObj={filterObj}
-        />
-      )}
       <nav className="SideNav border mt-5 rounded-2 color-bg-default pb-3">
         <div className="SideNav-item border-bottom mb-3">
           <h2 className="h2">🔗 Links</h2>
         </div>
-        {filteredLinks.map((resource) => (
+        {links.map((resource) => (
           <a
             key={`resource-${resource.id}`}
             className="SideNav-subItem color-bg-default color-fg-default"

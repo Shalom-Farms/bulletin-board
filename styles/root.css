@@ -23,7 +23,7 @@ header {
   position: sticky;
   background: #fff;
   top: 0px;
-  z-index: 500;
+  z-index: 1;
 }
 
 .breadcrumbs > div {

@@ -1,4 +1,5 @@
 import { format, parseISO } from "date-fns";
+import { format as formatTz } from "date-fns-tz";
 import Link from "next/link";
 import { Event } from "../types";
 import { RichTexts } from "./Block";
@@ -27,8 +28,10 @@ export default function EventsBox(props: {
           </div>
           <div className="f4-light color-fg-subtle">
             <span className="f6 mr-2">{"⏰"}</span>
-            {format(parseISO(event.properties.Date.date.start), "p")} -{" "}
-            {format(parseISO(event.properties.Date.date.end), "p")}
+            {formatTz(parseISO(event.properties.Date.date.start), "p", {
+              timeZone: "America/New_York",
+            })}{" "}
+            - {formatTz(parseISO(event.properties.Date.date.end), "p")}
           </div>
           <div className="f4-light color-fg-subtle">
             <span className="f6 mr-2">{"📍"}</span>

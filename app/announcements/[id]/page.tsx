@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import getPage from "@/src/api/getPage";
 import LoadingContent from "@/src/components/LoadingContent";
 import Breadcrumbs from "@/src/components/Breadcrumbs";
+import Labels from "@/src/components/Labels";
 
 export const revalidate = 300;
 
@@ -16,17 +17,18 @@ const TitleContent = async (props: { promise: Promise<AnnouncementType> }) => {
   if (!page) return null;
 
   return (
-    <>
+    <div className="mb-6">
       {page.icon?.emoji && (
         <div className="h3-mktg mb-2">{page.icon.emoji}</div>
       )}
       <h1 className="h3-mktg">
         <RichTexts rich_text={page.properties.Title.title} />
       </h1>
-      <div className="f3 mb-6">
+      <div className="f3">
         {format(parseISO(page.properties.Date.date.start), "PPP")}
       </div>
-    </>
+      <Labels labels={page.properties.Tags.multi_select} />
+    </div>
   );
 };
 

@@ -13,6 +13,9 @@ const TitleContent = async (props: { promise: Promise<ResourceType> }) => {
 
   return (
     <div className="my-6">
+      {page.icon?.emoji && (
+        <div className="h3-mktg mb-2">{page.icon.emoji}</div>
+      )}
       <h1 className="h3-mktg">
         <RichTexts rich_text={page.properties.Name.title} />
       </h1>

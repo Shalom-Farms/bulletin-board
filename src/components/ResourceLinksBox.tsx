@@ -28,6 +28,7 @@ export default function ResourceLinksBox(props: {
           >
             <div className="py-2 pl-md-6 pl-3 pr-3 pr-md-6 hover-bg">
               <div className="text-semibold">
+                {resource.icon?.emoji}{" "}
                 <RichTexts rich_text={resource.properties.Name.title} />
                 <span className="mr-2"></span>
                 {resource.properties.Url.url?.includes("docs.google.com") && (

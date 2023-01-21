@@ -186,6 +186,7 @@ export default function ResourcesBox(props: {
                       style={{ textDecoration: "none", color: "rgb(36,41,47)" }}
                     >
                       <div className="text-semibold">
+                        {resource.icon?.emoji}{" "}
                         <RichTexts rich_text={resource.properties.Name.title} />
                       </div>
                       <div className="color-fg-subtle">

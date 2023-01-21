@@ -88,6 +88,7 @@ export type Event = DBRow & {
     Description: RichTextCol;
     Location: RichTextCol;
     Published: CheckboxCol;
+    Time: RichTextCol;
   };
 };
 

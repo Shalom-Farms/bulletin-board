@@ -30,10 +30,10 @@ export default function ResourceLinksBox(props: {
               <div className="text-semibold">
                 <RichTexts rich_text={resource.properties.Name.title} />
                 <span className="mr-2"></span>
-                {resource.properties.Url.url.includes("docs.google.com") && (
+                {resource.properties.Url.url?.includes("docs.google.com") && (
                   <DriveIcon />
                 )}
-                {!resource.properties.Url.url.includes("docs.google.com") && (
+                {!resource.properties.Url.url?.includes("docs.google.com") && (
                   <ExternalLinkIcon />
                 )}
               </div>

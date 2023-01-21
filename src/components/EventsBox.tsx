@@ -22,10 +22,19 @@ export default function EventsBox(props: {
             <RichTexts rich_text={event.properties.Name.title} />
           </div>
           <div className="f4-light color-fg-subtle">
-            {format(parseISO(event.properties.Date.date.start), "PPP")} | 📍{" "}
+            <span className="f6 mr-2">{"🗓"}</span>
+            {format(parseISO(event.properties.Date.date.start), "PPP")}
+          </div>
+          <div className="f4-light color-fg-subtle">
+            <span className="f6 mr-2">{"⏰"}</span>
+            {format(parseISO(event.properties.Date.date.start), "p")} -{" "}
+            {format(parseISO(event.properties.Date.date.end), "p")}
+          </div>
+          <div className="f4-light color-fg-subtle">
+            <span className="f6 mr-2">{"📍"}</span>
             <RichTexts rich_text={event.properties.Location.rich_text} />
           </div>
-          <div className="f4-light">
+          <div className="f4-light mt-1">
             <RichTexts rich_text={event.properties.Description.rich_text} />
           </div>
         </div>

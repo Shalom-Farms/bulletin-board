@@ -33,12 +33,13 @@ export default async function Home() {
     3
   );
 
-  const { results: resources, hasMore: hasMoreResources } = await queryDb<Resource>(
-    TABLES.resources,
-    { and: [{ property: "Published", checkbox: { equals: true } }] },
-    [{ property: "Priority", direction: "ascending" }],
-    5
-  );
+  const { results: resources, hasMore: hasMoreResources } =
+    await queryDb<Resource>(
+      TABLES.resources,
+      { and: [{ property: "Published", checkbox: { equals: true } }] },
+      [{ property: "Priority", direction: "ascending" }],
+      100
+    );
 
   return (
     <main className="container px-md-0 px-3">
@@ -71,7 +72,7 @@ export default async function Home() {
         <EventsBox events={events} showViewAll={hasMoreEvents} />
       </div>
       <div id="resources" className="pt-5">
-        <ResourcesBox resources={resources} showViewAll={hasMoreResources} />
+        <ResourcesBox resources={resources} showViewAll={true} />
       </div>
     </main>
   );

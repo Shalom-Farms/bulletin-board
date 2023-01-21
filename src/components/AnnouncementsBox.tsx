@@ -21,7 +21,7 @@ export default function AnnouncementsBox(props: {
           href={`/announcements/${announcement.id}`}
           style={{ textDecoration: "none", color: "rgb(36,41,47)" }}
         >
-          <div className="Box-row">
+          <div className="Box-row hover-bg">
             <div className="f2">
               {announcement.icon?.emoji}{" "}
               {announcement.properties.Title.title[0].plain_text}

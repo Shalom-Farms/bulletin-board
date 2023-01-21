@@ -139,7 +139,7 @@ export type BlockDetails = {
   file?: {
     url: string;
   };
-  title?: string
+  title?: string;
 };
 
 type BlockTypeDetails = {

@@ -1,5 +1,11 @@
 import queryDb from "../api/queryDb";
-import { Block, RichText, BlockDetails, BlockTypes, ResourceLink } from "../types";
+import {
+  Block,
+  RichText,
+  BlockDetails,
+  BlockTypes,
+  ResourceLink,
+} from "../types";
 import ResourceLinksBox from "./ResourceLinksBox";
 
 const RichText = (props: RichText) => {
@@ -160,7 +166,7 @@ const Image = (props: BlockDetails) => {
   );
 };
 
-const ChildDatabase = async (props: { block_id: string } ) => {
+const ChildDatabase = async (props: { block_id: string }) => {
   const { results: links } = await queryDb<ResourceLink>(
     props.block_id,
     undefined,
@@ -168,8 +174,8 @@ const ChildDatabase = async (props: { block_id: string } ) => {
     1000
   );
 
-  return <ResourceLinksBox links={links} />
-}
+  return <ResourceLinksBox links={links} />;
+};
 
 const ComponentBlockTypeMap: { [key in BlockTypes]: Function } = {
   numbered_list_item: NumberedList,

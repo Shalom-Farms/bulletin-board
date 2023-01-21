@@ -154,12 +154,12 @@ export default function ResourceLinksBox(props: {
               <div className="text-semibold">
                 <RichTexts rich_text={resource.properties.Name.title} />
                 <span className="mr-2"></span>
-                {resource.properties.Url.url.includes(
-                  "docs.google.com"
-                ) && <DriveIcon />}
-                {!resource.properties.Url.url.includes(
-                  "docs.google.com"
-                ) && <ExternalLinkIcon />}
+                {resource.properties.Url.url.includes("docs.google.com") && (
+                  <DriveIcon />
+                )}
+                {!resource.properties.Url.url.includes("docs.google.com") && (
+                  <ExternalLinkIcon />
+                )}
               </div>
               <div className="color-fg-subtle">
                 <RichTexts
@@ -170,7 +170,7 @@ export default function ResourceLinksBox(props: {
             </div>
           </a>
         ))}
-        
+
         {props.showViewAll && (
           <div className="SideNav-item color-bg-default text-right">
             <Link className="btn btn-secondary mr-1" href="/resources">

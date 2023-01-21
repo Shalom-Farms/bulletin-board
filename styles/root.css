@@ -18,6 +18,10 @@ header {
   background-color: rgb(251, 251, 250) !important;
 }
 
+.hover-bg:hover {
+  background: rgba(227, 226, 224, 0.3);
+}
+
 .Label {
   color: rgb(64, 44, 27) !important;
   border: none !important;

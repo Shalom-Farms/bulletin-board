@@ -26,7 +26,7 @@ export default function ResourceLinksBox(props: {
             rel="noreferrer"
             href={resource.properties.Url.url}
           >
-            <div className="py-2 pl-md-6 pl-3 pr-3 pr-md-6">
+            <div className="py-2 pl-md-6 pl-3 pr-3 pr-md-6 hover-bg">
               <div className="text-semibold">
                 <RichTexts rich_text={resource.properties.Name.title} />
                 <span className="mr-2"></span>

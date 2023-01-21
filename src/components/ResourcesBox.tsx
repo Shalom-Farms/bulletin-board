@@ -63,7 +63,7 @@ const Filters = (props: {
         </summary>
 
         <ul
-          className="dropdown-menu dropdown-menu-se"
+          className="dropdown-menu dropdown-menu-sw"
           style={{ maxHeight: "200px", overflowY: "scroll" }}
         >
           {labels.map((label, i) => (

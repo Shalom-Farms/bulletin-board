@@ -1,4 +1,6 @@
-import { Block, RichText, BlockDetails, BlockTypes } from "../types";
+import queryDb from "../api/queryDb";
+import { Block, RichText, BlockDetails, BlockTypes, ResourceLink } from "../types";
+import ResourceLinksBox from "./ResourceLinksBox";
 
 const RichText = (props: RichText) => {
   const annotations = props.annotations;
@@ -158,6 +160,17 @@ const Image = (props: BlockDetails) => {
   );
 };
 
+const ChildDatabase = async (props: { block_id: string } ) => {
+  const { results: links } = await queryDb<ResourceLink>(
+    props.block_id,
+    undefined,
+    [{ property: "Priority", direction: "ascending" }],
+    1000
+  );
+
+  return <ResourceLinksBox links={links} />
+}
+
 const ComponentBlockTypeMap: { [key in BlockTypes]: Function } = {
   numbered_list_item: NumberedList,
   bulleted_list_item: BulletedList,
@@ -170,6 +183,7 @@ const ComponentBlockTypeMap: { [key in BlockTypes]: Function } = {
   quote: Quote,
   column: Column,
   image: Image,
+  child_database: ChildDatabase,
 };
 
 export default function BlockComponent(props: { block: Block }) {
@@ -181,6 +195,7 @@ export default function BlockComponent(props: { block: Block }) {
   return (
     <Component
       {...block[block.type]}
+      block_id={block.id}
       list_items={block.list_items}
       blocks={block.children}
     />

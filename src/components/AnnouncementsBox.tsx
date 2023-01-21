@@ -44,6 +44,32 @@ export default function AnnouncementsBox(props: {
           </Link>
         </div>
       )}
+      {(next || prev) && (
+        <div className="Box-footer">
+          <nav className="paginate-container" aria-label="Pagination">
+            <div className="pagination">
+              <Link
+                className="previous_page"
+                rel="prev"
+                href={prev || "#"}
+                aria-disabled={!prev}
+                aria-label="Previous Page"
+              >
+                Previous
+              </Link>
+              <Link
+                className="next_page"
+                rel="next"
+                href={next || "#"}
+                aria-disabled={!next}
+                aria-label="Next Page"
+              >
+                Next
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
     </div>
   );
 }

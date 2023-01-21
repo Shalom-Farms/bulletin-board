@@ -63,11 +63,21 @@ export type Announcement = DBRow & {
 export type Resource = DBRow & {
   properties: {
     Name: TitleCol;
-    Url: UrlCol;
     Type: SelectCol;
     Priority: NumberCol;
+    Published: CheckboxCol;
+    Tags: MultiSelectCol;
     Description: RichTextCol;
-    Tag: MultiSelectCol;
+  };
+};
+
+export type ResourceLink = DBRow & {
+  properties: {
+    Name: TitleCol;
+    Url: UrlCol;
+    Priority: NumberCol;
+    Description: RichTextCol;
+    Tags: MultiSelectCol;
   };
 };
 
@@ -110,7 +120,8 @@ export type BlockTypes =
   | "numbered_list_item"
   | "callout"
   | "column"
-  | "image";
+  | "image"
+  | "child_database";
 
 export type BlockDetails = {
   rich_text?: RichText[];
@@ -128,6 +139,7 @@ export type BlockDetails = {
   file?: {
     url: string;
   };
+  title?: string
 };
 
 type BlockTypeDetails = {

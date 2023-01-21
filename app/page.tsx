@@ -33,11 +33,11 @@ export default async function Home() {
     3
   );
 
-  const { results: resources } = await queryDb<Resource>(
+  const { results: resources, hasMore: hasMoreResources } = await queryDb<Resource>(
     TABLES.resources,
     { and: [{ property: "Published", checkbox: { equals: true } }] },
     [{ property: "Priority", direction: "ascending" }],
-    100
+    5
   );
 
   return (
@@ -71,7 +71,7 @@ export default async function Home() {
         <EventsBox events={events} showViewAll={hasMoreEvents} />
       </div>
       <div id="resources" className="pt-5">
-        <ResourcesBox resources={resources} showViewAll={true} />
+        <ResourcesBox resources={resources} showViewAll={hasMoreResources} />
       </div>
     </main>
   );

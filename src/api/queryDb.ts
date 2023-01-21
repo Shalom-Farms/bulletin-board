@@ -14,7 +14,7 @@ const DATABASE_IDS: { [key: string]: string } = {
 };
 
 export default async function queryDb<T>(
-  table: (typeof TABLES)[keyof typeof TABLES],
+  table: (typeof TABLES)[keyof typeof TABLES] | string,
   filter?: {},
   sorts?: { property: string; direction: string }[],
   page_size?: number,
@@ -24,7 +24,7 @@ export default async function queryDb<T>(
   hasMore: boolean | undefined;
   nextCursor: string | null | undefined;
 }> {
-  const database_id = DATABASE_IDS[table];
+  const database_id = DATABASE_IDS[table] || table;
 
   let hasNext = true;
   let res;

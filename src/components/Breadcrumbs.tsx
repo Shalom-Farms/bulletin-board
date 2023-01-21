@@ -1,8 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Breadcrumbs(props: {
   links: { url: string; label: string }[];
 }) {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <nav className="pl-2 mb-8 breadcrumbs" aria-label="Pagination">
       <div className="d-flex flex-items-center">

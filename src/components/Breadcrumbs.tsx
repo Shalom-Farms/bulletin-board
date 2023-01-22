@@ -12,7 +12,7 @@ export default function Breadcrumbs(props: {
   }, []);
 
   return (
-    <nav className="pl-2 mb-8 breadcrumbs" aria-label="Pagination">
+    <nav className="pl-2 mb-md-8 mb-2 breadcrumbs" aria-label="Pagination">
       <div className="d-flex flex-items-center">
         <Link
           className="p-2 color-fg-default hover-bg rounded-2"

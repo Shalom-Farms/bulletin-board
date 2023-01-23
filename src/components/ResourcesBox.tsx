@@ -23,25 +23,27 @@ const Filters = (props: {
   labels: { color: string; name: string }[];
   filterObj?: { color: string; name: string };
 }) => {
-  const { labels, filterObj } = props;
+  const { labels, filterObj, onFilter } = props;
 
   const [open, setOpen] = useState<boolean>(false);
 
+  const ClearFilter = (props: { className: string }) => (
+    <div className={`d-inline-block ${props.className}`}>
+      <a
+        onClick={() => onFilter(null)}
+        className="color-fg-subtle text-light"
+        style={{ textDecoration: "none", cursor: "pointer" }}
+      >
+        Clear filter
+      </a>
+    </div>
+  );
+
   return (
-    <div>
-      {filterObj && (
-        <div className="d-inline-block mr-3">
-          <a
-            onClick={() => props.onFilter(null)}
-            className="color-fg-subtle text-light"
-            style={{ textDecoration: "none", cursor: "pointer" }}
-          >
-            Clear filter
-          </a>
-        </div>
-      )}
+    <>
+      {filterObj && <ClearFilter className="hide-sm mr-3" />}
       <details
-        className="dropdown details-reset details-overlay d-inline-block"
+        className="dropdown details-reset details-overlay d-inline-block mt-3 mt-sm-0"
         onClick={(e) => {
           e.preventDefault();
           setOpen(!open);
@@ -63,7 +65,7 @@ const Filters = (props: {
         </summary>
 
         <ul
-          className="dropdown-menu dropdown-menu-sw"
+          className="dropdown-menu dropdown-menu-se dropdown-menu-sm-sw"
           style={{ maxHeight: "200px", overflowY: "scroll" }}
         >
           {labels.map((label, i) => (
@@ -86,7 +88,8 @@ const Filters = (props: {
           ))}
         </ul>
       </details>
-    </div>
+      {filterObj && <ClearFilter className="hide-lg ml-3" />}
+    </>
   );
 };
 
@@ -147,16 +150,29 @@ export default function ResourcesBox(props: {
     <>
       <nav className="SideNav border mt-5 rounded-2">
         <div className="SideNav-item clearfix">
-          <h2 className="h2 float-left">ℹ️ Resources</h2>
-          <div className="float-right">
-            {props.showFilter && (
+          <h2
+            className={`h2 ${
+              props.showFilter ? "float-sm-left" : "float-left"
+            }`}
+          >
+            ℹ️ Resources
+          </h2>
+          {showViewAll && !props.showFilter && (
+            <div className="float-right">
+              <Link className="btn btn-secondary mr-1" href="/resources">
+                View All
+              </Link>
+            </div>
+          )}
+          {props.showFilter && (
+            <div className="float-sm-right border-top mt-3 mt-sm-0 border-sm-0">
               <Filters
                 labels={uniqueLabels}
                 onFilter={setFilter}
                 filterObj={filterObj}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
         {Object.keys(groupedResources)
           .sort((a, b) => sortOrder[a] - sortOrder[b])
@@ -201,14 +217,6 @@ export default function ResourcesBox(props: {
               </nav>
             </>
           ))}
-
-        {showViewAll && (
-          <div className="SideNav-item text-right color-bg-default">
-            <Link className="btn btn-secondary mr-1" href="/resources">
-              View All
-            </Link>
-          </div>
-        )}
       </nav>
     </>
   );

@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function Breadcrumbs(props: {
   links: { url: string; label: string }[];
 }) {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -25,8 +24,8 @@ export default function Breadcrumbs(props: {
         <span className="color-fg-subtle f3 p-2" style={{ fontWeight: 100 }}>
           {"   /   "}
         </span>
-        {props.links.map(({ url, label }) => (
-          <>
+        {props.links.map(({ url, label }, i) => (
+          <React.Fragment key={`breadcrumb-${i}`}>
             <Link
               className="p-2 color-fg-default hover-bg rounded-2"
               style={{ textDecoration: "none" }}
@@ -41,7 +40,7 @@ export default function Breadcrumbs(props: {
             >
               {"   /   "}
             </span>
-          </>
+          </React.Fragment>
         ))}
       </div>
     </nav>

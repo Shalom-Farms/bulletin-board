@@ -12,8 +12,15 @@ export default function EventsBox(props: {
   const { events, showViewAll, next, prev } = props;
   return (
     <div className="Box mt-5">
-      <div className="Box-header">
-        <h2 className="h2">🗓 Events</h2>
+      <div className="Box-header clearfix">
+        <h2 className="h2 float-left">🗓 Events</h2>
+        {showViewAll && (
+          <div className="float-right">
+            <Link className="btn btn-secondary mr-1" href="/events">
+              View All
+            </Link>
+          </div>
+        )}
       </div>
       {events.map((event, i) => (
         <div className="Box-row" key={`event-${i}`}>
@@ -38,13 +45,6 @@ export default function EventsBox(props: {
           </div>
         </div>
       ))}
-      {showViewAll && (
-        <div className="Box-footer text-right">
-          <Link className="btn btn-secondary mr-1" href="/events">
-            View All
-          </Link>
-        </div>
-      )}
       {(next || prev) && (
         <div className="Box-footer">
           <nav className="paginate-container" aria-label="Pagination">

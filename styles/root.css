@@ -30,6 +30,10 @@ header {
   background-color: rgba(251, 251, 250, 0.5) !important;
 }
 
+.SideNav-item {
+  background-color: var(--color-canvas-subtle) !important;
+}
+
 .hover-bg:hover {
   background: rgba(227, 226, 224, 0.3);
 }
@@ -99,7 +103,15 @@ header {
 }
 
 @media only screen and (max-device-width: 543px) {
+  .d-inline-block.hide-sm,
   .hide-sm {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-device-width: 544px) {
+  .d-inline-block.hide-lg,
+  .hide-lg {
     display: none !important;
   }
 }

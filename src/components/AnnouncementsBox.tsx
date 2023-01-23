@@ -12,8 +12,15 @@ export default function AnnouncementsBox(props: {
   const { announcements, showViewAll, next, prev } = props;
   return (
     <div className="Box">
-      <div className="Box-header">
-        <h2 className="h2">📢 Announcements</h2>
+      <div className="Box-header clearfix">
+        <h2 className="h2 float-left">📢 Announcements</h2>
+        {showViewAll && (
+          <div className="float-right">
+            <Link className="btn btn-secondary mr-1" href="/announcements">
+              View All
+            </Link>
+          </div>
+        )}
       </div>
       {announcements.map((announcement, i) => (
         <Link
@@ -37,13 +44,6 @@ export default function AnnouncementsBox(props: {
           </div>
         </Link>
       ))}
-      {showViewAll && (
-        <div className="Box-footer text-right">
-          <Link className="btn btn-secondary mr-1" href="/announcements">
-            View All
-          </Link>
-        </div>
-      )}
       {(next || prev) && (
         <div className="Box-footer">
           <nav className="paginate-container" aria-label="Pagination">

@@ -4,7 +4,7 @@ import EventsBox from "@/src/components/EventsBox";
 import { Event } from "@/src/types";
 import { formatISO } from "date-fns";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 export default async function Events(props: {
   searchParams?: { start?: string; prev?: string };

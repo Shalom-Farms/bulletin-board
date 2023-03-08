@@ -5,7 +5,7 @@ import EventsBox from "@/src/components/EventsBox";
 import { formatISO } from "date-fns";
 import ResourcesBox from "@/src/components/ResourcesBox";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 export default async function Home() {
   const { results: announcements, hasMore: hasMoreAnnouncements } =

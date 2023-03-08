@@ -9,7 +9,7 @@ import LoadingContent from "@/src/components/LoadingContent";
 import Breadcrumbs from "@/src/components/Breadcrumbs";
 import Labels from "@/src/components/Labels";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 const TitleContent = async (props: { promise: Promise<AnnouncementType> }) => {
   const page = await props.promise;

@@ -7,7 +7,7 @@ import LoadingContent from "@/src/components/LoadingContent";
 import { Block, Resource as ResourceType } from "@/src/types";
 import { Suspense } from "react";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 const TitleContent = async (props: { promise: Promise<ResourceType> }) => {
   const page = await props.promise;

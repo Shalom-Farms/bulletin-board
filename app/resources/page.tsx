@@ -3,7 +3,7 @@ import ResourcesBox from "@/src/components/ResourcesBox";
 import { Resource } from "@/src/types";
 import Breadcrumbs from "@/src/components/Breadcrumbs";
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export default async function Resources() {
   const { results: resources } = await queryDb<Resource>(

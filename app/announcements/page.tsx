@@ -3,7 +3,7 @@ import AnnouncementsBox from "@/src/components/AnnouncementsBox";
 import Breadcrumbs from "@/src/components/Breadcrumbs";
 import { Announcement } from "@/src/types";
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export default async function Announcements(props: {
   searchParams?: { start?: string; prev?: string };
